@@ -1,10 +1,14 @@
-﻿using dotbim;
+using dotbim;
 using export_DOTBIM.Interfaces;
 using Rhino;
+using Rhino.Commands;
+using Rhino.DocObjects;
 using Rhino.Geometry;
+using Rhino.Input;
 using Rhino.Input.Custom;
 using Rhino.Render.ChangeQueue;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace export_DOTBIM
@@ -50,6 +54,17 @@ namespace export_DOTBIM
         {
             try
             {
+                /*/
+                // choose meshing type
+                OptionInteger optInteger = new OptionInteger(0,0,1);
+                GetOption getIntOption = new GetOption();
+                getIntOption.AddOptionInteger("optionInteger", ref optInteger);
+                getIntOption.SetCommandPrompt("Please select an integer");
+                getIntOption.Get();
+                RhinoApp.WriteLine("Chosen value: {0}", optInteger.CurrentValue);
+                // choose meshing type
+                /*/
+
                 List<IElementSetConvertable> elementSetConvertables = new List<IElementSetConvertable>();
                 List<dotbim.Mesh> dotmeshes = new List<dotbim.Mesh>();
                 List<Element> dotelements = new List<Element>();
@@ -60,7 +75,8 @@ namespace export_DOTBIM
                     if (geo == null) continue;
 
                     //var inputmesh = (Rhino.Geometry.Mesh)geo.Geometry;
-                    var inputmesh = RhinoObjToMesh(geo);
+                    Rhino.Geometry.Mesh inputmesh = new Rhino.Geometry.Mesh();
+                    inputmesh = RhinoObjToMesh(geo);
 
                     var mesh = inputmesh.DuplicateMesh();
                     mesh.Faces.ConvertQuadsToTriangles();
@@ -158,12 +174,23 @@ namespace export_DOTBIM
             }
             else
             {
-                obj.CreateMeshes(MeshType.Preview, MeshingParameters.Minimal, true);
+                obj.CreateMeshes(MeshType.Preview, MeshingParameters.Default, true);
                 foreach (var m in obj.GetMeshes(MeshType.Preview))
                     mesh.Append(m);
             }
             return mesh;
         }
+
+        List<MeshingParameters> meshingPars = new List<MeshingParameters>
+                    {
+                        MeshingParameters.Minimal,
+                        MeshingParameters.Default
+                    };
+        List<MeshType> meshTypes = new List<MeshType>
+                    {
+                        MeshType.Preview,
+                        MeshType.Analysis,
+                    };
         // You can override methods here to change the plug-in behavior on
         // loading and shut down, add options pages to the Rhino _Option command
         // and maintain plug-in wide options in a document.
