@@ -54,16 +54,14 @@ namespace export_DOTBIM
         {
             try
             {
-                /*/
-                // choose meshing type
-                OptionInteger optInteger = new OptionInteger(0,0,1);
-                GetOption getIntOption = new GetOption();
-                getIntOption.AddOptionInteger("optionInteger", ref optInteger);
-                getIntOption.SetCommandPrompt("Please select an integer");
-                getIntOption.Get();
-                RhinoApp.WriteLine("Chosen value: {0}", optInteger.CurrentValue);
-                // choose meshing type
-                /*/
+
+                int mehLevel = 0;
+                var gs = new GetNumber();
+                gs.SetCommandPrompt("Meshing Level 0 or 1");
+                gs.AcceptNothing(true);
+                gs.Get();
+                if (gs.CommandResult() == Result.Success)
+                    mehLevel = (int)gs.Number();
 
                 List<IElementSetConvertable> elementSetConvertables = new List<IElementSetConvertable>();
                 List<dotbim.Mesh> dotmeshes = new List<dotbim.Mesh>();
@@ -76,7 +74,7 @@ namespace export_DOTBIM
 
                     //var inputmesh = (Rhino.Geometry.Mesh)geo.Geometry;
                     Rhino.Geometry.Mesh inputmesh = new Rhino.Geometry.Mesh();
-                    inputmesh = RhinoObjToMesh(geo);
+                    inputmesh = RhinoObjToMesh(geo, mehLevel);
 
                     var mesh = inputmesh.DuplicateMesh();
                     mesh.Faces.ConvertQuadsToTriangles();
@@ -160,7 +158,7 @@ namespace export_DOTBIM
         }
 
 
-        Rhino.Geometry.Mesh RhinoObjToMesh (Rhino.DocObjects.RhinoObject obj)
+        Rhino.Geometry.Mesh RhinoObjToMesh (Rhino.DocObjects.RhinoObject obj, int level)
         {
             var mesh = new Rhino.Geometry.Mesh();
             if (obj.Geometry.GetType() == typeof(SubD))
@@ -174,7 +172,7 @@ namespace export_DOTBIM
             }
             else
             {
-                obj.CreateMeshes(MeshType.Preview, MeshingParameters.Default, true);
+                obj.CreateMeshes(MeshType.Preview, meshingPars[level], true);
                 foreach (var m in obj.GetMeshes(MeshType.Preview))
                     mesh.Append(m);
             }
@@ -186,11 +184,7 @@ namespace export_DOTBIM
                         MeshingParameters.Minimal,
                         MeshingParameters.Default
                     };
-        List<MeshType> meshTypes = new List<MeshType>
-                    {
-                        MeshType.Preview,
-                        MeshType.Analysis,
-                    };
+
         // You can override methods here to change the plug-in behavior on
         // loading and shut down, add options pages to the Rhino _Option command
         // and maintain plug-in wide options in a document.
