@@ -1,0 +1,13 @@
+C:\Users\archi\source\repos\dotbimRH\bin\Debug\net48\import_DOTBIM.rhp
+C:\Users\archi\source\repos\dotbimRH\bin\Debug\net48\import_DOTBIM.pdb
+C:\Users\archi\source\repos\dotbimRH\bin\Debug\net48\dotbim.dll
+C:\Users\archi\source\repos\dotbimRH\bin\Debug\net48\Newtonsoft.Json.dll
+C:\Users\archi\source\repos\dotbimRH\bin\Debug\net48\Newtonsoft.Json.xml
+C:\Users\archi\source\repos\dotbimRH\obj\Debug\net48\import_DOTBIM.csproj.AssemblyReference.cache
+C:\Users\archi\source\repos\dotbimRH\obj\Debug\net48\import_DOTBIM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\archi\source\repos\dotbimRH\obj\Debug\net48\import_DOTBIM.AssemblyInfoInputs.cache
+C:\Users\archi\source\repos\dotbimRH\obj\Debug\net48\import_DOTBIM.AssemblyInfo.cs
+C:\Users\archi\source\repos\dotbimRH\obj\Debug\net48\import_DOTBIM.csproj.CoreCompileInputs.cache
+C:\Users\archi\source\repos\dotbimRH\obj\Debug\net48\import_DOTBIM.csproj.CopyComplete
+C:\Users\archi\source\repos\dotbimRH\obj\Debug\net48\import_DOTBIM.rhp
+C:\Users\archi\source\repos\dotbimRH\obj\Debug\net48\import_DOTBIM.pdb

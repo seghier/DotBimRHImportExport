@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <Version>1.0</Version>
+    <Title>ExportDotBimPlugin</Title>
+    <Description>Description of ExportDotBimPlugin</Description>
+    <TargetExt>.rhp</TargetExt>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="EmbeddedResources\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ExportDotbim.cs" />
+    <Compile Remove="ExportDotBimCommand.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="dotbim">
+      <HintPath>..\..\..\Documents\GitHub\dotbimGH_original\dotbimGH\bin\Debug\dotbim.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\Documents\GitHub\dotbimGH_original\dotbimGH\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RhinoCommon">
+      <HintPath>..\..\..\..\..\Program Files\Rhino 7\System\RhinoCommon.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  
+</Project>
