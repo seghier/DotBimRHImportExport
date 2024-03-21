@@ -8,7 +8,7 @@ https://github.com/paireks/dotbim
 To import dotbim file:
 
 	- File >> Import >> DotBim (*.bim)
-  - File >> Export >> DotBim (*.bim)
+	- File >> Export >> DotBim (*.bim)
 
 Install the plugin to: 
 
