@@ -58,7 +58,7 @@ namespace export_DOTBIM
                 int mehLevel = 0;
                 var gs = new GetNumber();
                 gs.SetCommandPrompt("Meshing Level 0 or 1");
-                gs.AcceptNothing(true);
+                gs.AcceptNothing(false);
                 gs.Get();
                 if (gs.CommandResult() == Result.Success)
                     mehLevel = (int)gs.Number();
